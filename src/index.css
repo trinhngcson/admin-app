@@ -1,13 +1,59 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "Roboto", sans-serif;
+}
+.trigger {
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+main {
+  height: 85vh;
+  overflow-y: scroll;
+  background-color: transparent !important;
+}
+main::-webkit-scrollbar {
+  width: 0;
+}
+.trigger:hover {
+  color: #1890ff;
+}
+.ant-layout-content {
+  background: transparent !important;
+}
+.logo {
+  height: 32px;
+  margin: 16px;
+}
+.sm-logo {
+  display: none;
+}
+.lg-logo {
+  transition: 0.3s;
+}
+.ant-layout-sider-collapsed .sm-logo {
+  display: block;
+  transition: 0.3s;
+}
+.ant-layout-sider-collapsed .lg-logo {
+  display: none;
+  transition: 0.3s;
+}
+.ant-layout {
+  min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.ant-layout-header h5 {
+  line-height: 30px;
+}
+.ant-layout-header p {
+  line-height: 20px;
+}
+.ant-menu-title-content {
+  font-size: 16px;
+}
+.ant-layout-header div .badge {
+  top: 16px;
+  right: -6px;
 }
