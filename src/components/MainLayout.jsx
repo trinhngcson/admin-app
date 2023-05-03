@@ -14,6 +14,8 @@ import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { Layout, Menu, theme } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { Header, Sider, Content } = Layout;
 
@@ -209,6 +211,17 @@ const MainLayout = () => {
             background: colorBgContainer,
           }}
         >
+          <ToastContainer
+            position="top-right"
+            autoClose={250}
+            hideProgressBar={false}
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            theme="light"
+          />
           <Outlet />
         </Content>
       </Layout>

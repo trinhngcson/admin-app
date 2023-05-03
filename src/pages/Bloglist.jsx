@@ -1,5 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+
+import { BiEdit } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getBlogs } from "../features/blogs/blogSlice";
 const Bloglist = () => {
   const columns = [
     {
@@ -11,21 +18,37 @@ const Bloglist = () => {
       dataIndex: "name",
     },
     {
-      title: "Sản phẩm",
-      dataIndex: "product",
+      title: "Loại",
+      dataIndex: "category",
     },
     {
-      title: "Trạng thái",
-      dataIndex: "status",
+      title: "Action",
+      dataIndex: "action",
     },
   ];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBlogs());
+  }, []);
+  const blogState = useSelector((state) => state.blogs.blogs);
   const data1 = [];
-  for (let i = 0; i < 46; i++) {
+  for (let i = 0; i < blogState.length; i++) {
     data1.push({
       key: i,
-      name: `Edward King ${i}`,
-      product: 32,
-      status: `process`,
+      name: blogState[i].title,
+      category: blogState[i].category,
+      action: (
+        <>
+          <>
+            <Link to="/" className="fs-3 text-danger">
+              <BiEdit />
+            </Link>
+            <Link to="/" className="fs-3 ms-3 text-danger">
+              <AiFillDelete />
+            </Link>
+          </>
+        </>
+      ),
     });
   }
   return (

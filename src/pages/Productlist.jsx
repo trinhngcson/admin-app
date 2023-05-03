@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../features/product/productSlice";
+
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
 const Productlist = () => {
   const columns = [
     {
@@ -11,25 +16,60 @@ const Productlist = () => {
     {
       title: "Tên",
       dataIndex: "name",
+      sorter: (a, b) => a.name.length - b.name.length,
     },
     {
-      title: "Sản phẩm",
-      dataIndex: "product",
+      title: "Thương hiệu",
+      dataIndex: "brand",
+      sorter: (a, b) => a.brand.length - b.brand.length,
     },
     {
-      title: "Trạng thái",
-      dataIndex: "status",
+      title: "Loại sản phẩm",
+      dataIndex: "category",
+      sorter: (a, b) => a.category.length - b.category.length,
+    },
+    {
+      title: "Color",
+      dataIndex: "color",
+    },
+    {
+      title: "Giá thành",
+      dataIndex: "price",
+      sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
     },
   ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
   const data1 = [];
-  for (let i = 0; i < 46; i++) {
+  const productState = useSelector((state) => state.product.products);
+  for (let i = 0; i < productState.length; i++) {
     data1.push({
       key: i,
-      name: `Edward King ${i}`,
-      product: 32,
-      status: `process`,
+      name: productState[i].title,
+      category: productState[i].category,
+      brand: productState[i].brand,
+      color: productState[i].color.title,
+      price: productState[i].price,
+      action: (
+        <>
+          <Link to="/" className="fs-3 text-danger">
+            <BiEdit />
+          </Link>
+          <Link to="/" className="fs-3 ms-3 text-danger">
+            <AiFillDelete />
+          </Link>
+        </>
+      ),
     });
   }
+
   return (
     <div>
       <h3 className="mb-4 title">Danh sách sản phẩm</h3>
