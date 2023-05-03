@@ -1,21 +1,21 @@
 import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
-import brandService from "./brandService";
+import couponService from "./couponService";
 
-export const getBrands = createAsyncThunk(
-  "brand/get-brands",
+export const getCoupons = createAsyncThunk(
+  "coupon/get-coupons",
   async (thunkAPI) => {
     try {
-      return await brandService.getBrands();
+      return await couponService.getCoupons();
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
-export const createBrand = createAsyncThunk(
-  "brand/create-brand",
-  async (brandData, thunkAPI) => {
+export const createCoupon = createAsyncThunk(
+  "coupon/create-coupon",
+  async (couponData, thunkAPI) => {
     try {
-      return await brandService.createBrand(brandData);
+      return await couponService.createCoupon(couponData);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
@@ -23,43 +23,43 @@ export const createBrand = createAsyncThunk(
 );
 export const resetState = createAction("Reset_all");
 const initialState = {
-  brands: [],
+  coupons: [],
   isError: false,
   isLoading: false,
   isSuccess: false,
   message: "",
 };
-export const brandSlice = createSlice({
-  name: "brands",
+export const couponSlice = createSlice({
+  name: "coupons",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getBrands.pending, (state) => {
+      .addCase(getCoupons.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getBrands.fulfilled, (state, action) => {
+      .addCase(getCoupons.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.brands = action.payload;
+        state.coupons = action.payload;
       })
-      .addCase(getBrands.rejected, (state, action) => {
+      .addCase(getCoupons.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
       })
-      .addCase(createBrand.pending, (state) => {
+      .addCase(createCoupon.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createBrand.fulfilled, (state, action) => {
+      .addCase(createCoupon.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.createdBrand = action.payload;
+        state.createdCoupon = action.payload;
       })
-      .addCase(createBrand.rejected, (state, action) => {
+      .addCase(createCoupon.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
@@ -68,4 +68,4 @@ export const brandSlice = createSlice({
       .addCase(resetState, () => initialState);
   },
 });
-export default brandSlice.reducer;
+export default couponSlice.reducer;

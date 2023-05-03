@@ -10,6 +10,7 @@ import { SiBrandfolder } from "react-icons/si";
 import { BiCategoryAlt } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { ImBlog } from "react-icons/im";
+import { RiCouponLine } from "react-icons/ri";
 import { FaClipboardList, FaBloggerB } from "react-icons/fa";
 import { Layout, Menu, theme } from "antd";
 import { Link, useNavigate } from "react-router-dom";
@@ -106,6 +107,23 @@ const MainLayout = () => {
               key: "orders",
               icon: <FaClipboardList className="fs-4" />,
               label: "Đơn đặt hàng",
+            },
+            {
+              key: "marketing",
+              icon: <RiCouponLine className="fs-4" />,
+              label: "Marketing",
+              children: [
+                {
+                  key: "coupon",
+                  icon: <ImBlog className="fs-4" />,
+                  label: "Thêm Coupon",
+                },
+                {
+                  key: "list-coupon",
+                  icon: <RiCouponLine className="fs-4" />,
+                  label: "Danh sách Coupon",
+                },
+              ],
             },
             {
               key: "blogs",

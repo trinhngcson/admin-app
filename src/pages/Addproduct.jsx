@@ -12,7 +12,7 @@ import { getColors } from "../features/color/colorSlice";
 
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts } from "../features/product/productSlice";
+import { createProducts, resetState } from "../features/product/productSlice";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -93,6 +93,7 @@ const Addproduct = () => {
       formik.resetForm();
       setColor(null);
       setTimeout(() => {
+        dispatch(resetState());
         navigate("/admin/list-product");
       }, 3000);
     },

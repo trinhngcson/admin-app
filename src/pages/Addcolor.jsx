@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { createColor } from "../features/color/colorSlice";
+import { createColor, resetState } from "../features/color/colorSlice";
 
 let schema = Yup.object({
   title: Yup.string().required("Nhập màu"),
@@ -35,6 +35,7 @@ const Addcolor = () => {
       dispatch(createColor(values));
       formik.resetForm();
       setTimeout(() => {
+        dispatch(resetState());
         navigate("/admin/list-color");
       }, 3000);
     },

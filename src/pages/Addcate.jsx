@@ -7,7 +7,10 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { createpCategory } from "../features/pcategory/pcategorySlice";
+import {
+  createpCategory,
+  resetState,
+} from "../features/pcategory/pcategorySlice";
 
 let schema = Yup.object({
   title: Yup.string().required("Nhập loại sản phẩm"),
@@ -35,6 +38,7 @@ const Addcate = () => {
       dispatch(createpCategory(values));
       formik.resetForm();
       setTimeout(() => {
+        dispatch(resetState());
         navigate("/admin/list-category");
       }, 3000);
     },

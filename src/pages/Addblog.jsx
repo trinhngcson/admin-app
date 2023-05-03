@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CustomInput from "../components/CustomInput";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { createBlog } from "../features/blogs/blogSlice";
+import { createBlog, resetState } from "../features/blogs/blogSlice";
 import { getCategories } from "../features/bcategory/bcategorySlice";
 
 let schema = Yup.object({
@@ -59,6 +59,7 @@ const Addblog = () => {
       dispatch(createBlog(values));
       formik.resetForm();
       setTimeout(() => {
+        dispatch(resetState());
         navigate("/admin/list-blog");
       }, 3000);
     },
