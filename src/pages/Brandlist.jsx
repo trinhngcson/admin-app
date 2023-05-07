@@ -1,12 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getBrands } from "../features/brand/brandSlice";
+import { toast } from "react-toastify";
+import {
+  getBrands,
+  resetState,
+  deleteBrand,
+} from "../features/brand/brandSlice";
 
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import CustomModal from "../components/CustomModal";
 const Brandlist = () => {
+  const [open, setOpen] = useState(false);
+  const [brandId, setBrandId] = useState("");
+  const showModal = (e) => {
+    setOpen(true);
+    setBrandId(e);
+  };
+  const hideModal = () => {
+    setOpen(false);
+  };
   const columns = [
     {
       title: "No.",
@@ -15,6 +30,7 @@ const Brandlist = () => {
     {
       title: "Tên",
       dataIndex: "name",
+      sorter: (a, b) => (a.name > b.name ? 1 : -1),
     },
     {
       title: "Action",
@@ -24,6 +40,7 @@ const Brandlist = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(resetState());
     dispatch(getBrands());
   }, []);
   const brandState = useSelector((state) => state.brand.brands);
@@ -35,23 +52,45 @@ const Brandlist = () => {
       action: (
         <>
           <>
-            <Link to="/" className="fs-3 text-danger">
+            <Link
+              to={`/admin/brand/${brandState[i]._id}`}
+              className="fs-3 text-danger"
+            >
               <BiEdit />
             </Link>
-            <Link to="/" className="fs-3 ms-3 text-danger">
+            <button
+              className="fs-3 ms-3 text-danger bg-transparent border-0"
+              onClick={() => showModal(brandState[i]._id)}
+            >
               <AiFillDelete />
-            </Link>
+            </button>
           </>
         </>
       ),
     });
   }
+  const deleteBr = (e) => {
+    dispatch(deleteBrand(e));
+    setOpen(false);
+    setTimeout(() => {
+      toast.success("Xoá thương hiệu thành công");
+      dispatch(getBrands());
+    }, 100);
+  };
   return (
     <div>
       <h3 className="mb-4 title">Danh sách thương hiệu</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+        title="Bạn có chắc chắn xoá thương hiệu này không"
+        hideModal={hideModal}
+        open={open}
+        action={() => {
+          deleteBr(brandId);
+        }}
+      />
     </div>
   );
 };

@@ -10,7 +10,7 @@ const CustomInput = (props) => {
         id={i_id}
         placeholder={label}
         name={name}
-        defaultValue={val}
+        value={val}
         onChange={onCh}
         onBlur={onBl}
         min={min}
