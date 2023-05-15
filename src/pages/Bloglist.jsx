@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 
 import { BiEdit } from "react-icons/bi";
@@ -6,8 +6,21 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getBlogs } from "../features/blogs/blogSlice";
+import { deleteBlog, getBlogs, resetState } from "../features/blogs/blogSlice";
+import CustomModal from "../components/CustomModal";
+import { toast } from "react-toastify";
 const Bloglist = () => {
+  const [open, setOpen] = useState(false);
+  const [blogId, setBlogId] = useState("");
+  const [blogName, setBlogName] = useState("");
+  const hideModal = () => {
+    setOpen(false);
+  };
+  const showModal = (id, name) => {
+    setBlogId(id);
+    setBlogName(name);
+    setOpen(true);
+  };
   const columns = [
     {
       title: "No.",
@@ -28,6 +41,7 @@ const Bloglist = () => {
   ];
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(resetState());
     dispatch(getBlogs());
   }, []);
   const blogState = useSelector((state) => state.blogs.blogs);
@@ -40,23 +54,47 @@ const Bloglist = () => {
       action: (
         <>
           <>
-            <Link to="/" className="fs-3 text-danger">
+            <Link
+              to={`/admin/blog/${blogState[i]._id}`}
+              className="fs-3 text-danger"
+            >
               <BiEdit />
             </Link>
-            <Link to="/" className="fs-3 ms-3 text-danger">
+            <button
+              className="fs-3 ms-3 text-danger bg-transparent border-0"
+              onClick={() => {
+                showModal(blogState[i]._id, blogState[i].title);
+              }}
+            >
               <AiFillDelete />
-            </Link>
+            </button>
           </>
         </>
       ),
     });
   }
+  const deleteBl = (id) => {
+    dispatch(deleteBlog(id));
+    setOpen(false);
+    setTimeout(() => {
+      toast.success("Xoá Blog thành công!!!");
+      dispatch(getBlogs());
+    }, 100);
+  };
   return (
     <div>
       <h3 className="mb-4 title">Danh sách Blogs</h3>
       <div>
         <Table columns={columns} dataSource={data1} />
       </div>
+      <CustomModal
+        title={`Bạn có chắc chắn xoá Blog: ${blogName} không?`}
+        open={open}
+        hideModal={hideModal}
+        action={() => {
+          deleteBl(blogId);
+        }}
+      />
     </div>
   );
 };

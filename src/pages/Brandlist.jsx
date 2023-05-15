@@ -15,9 +15,11 @@ import CustomModal from "../components/CustomModal";
 const Brandlist = () => {
   const [open, setOpen] = useState(false);
   const [brandId, setBrandId] = useState("");
-  const showModal = (e) => {
+  const [brandName, setBrandName] = useState("");
+  const showModal = (id, name) => {
     setOpen(true);
-    setBrandId(e);
+    setBrandId(id);
+    setBrandName(name);
   };
   const hideModal = () => {
     setOpen(false);
@@ -60,7 +62,7 @@ const Brandlist = () => {
             </Link>
             <button
               className="fs-3 ms-3 text-danger bg-transparent border-0"
-              onClick={() => showModal(brandState[i]._id)}
+              onClick={() => showModal(brandState[i]._id, brandState[i].title)}
             >
               <AiFillDelete />
             </button>
@@ -84,7 +86,7 @@ const Brandlist = () => {
         <Table columns={columns} dataSource={data1} />
       </div>
       <CustomModal
-        title="Bạn có chắc chắn xoá thương hiệu này không"
+        title={`Bạn có chắc chắn xoá thương hiệu: ${brandName} này không`}
         hideModal={hideModal}
         open={open}
         action={() => {

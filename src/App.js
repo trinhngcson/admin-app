@@ -34,10 +34,13 @@ function App() {
           <Route path="enquiries" element={<Enquiries />} />
           <Route path="list-coupon" element={<Couponlist />} />
           <Route path="coupon" element={<Addcoupon />} />
+          <Route path="coupon/:id" element={<Addcoupon />} />
           <Route path="list-blog" element={<Bloglist />} />
           <Route path="blog" element={<Addblog />} />
+          <Route path="blog/:id" element={<Addblog />} />
           <Route path="list-blog-category" element={<Blogcatelist />} />
           <Route path="blog-category" element={<Addblogcate />} />
+          <Route path="blog-category/:id" element={<Addblogcate />} />
           <Route path="orders" element={<Orders />} />
           <Route path="customers" element={<Customers />} />
           <Route path="list-color" element={<Colorlist />} />

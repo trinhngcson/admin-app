@@ -25,7 +25,7 @@ export const delImg = createAsyncThunk(
     }
   }
 );
-export const resetState = createAction("Reset_all");
+export const resetImages = createAction("Reset_all");
 const initialState = {
   images: [],
   isError: false,
@@ -71,7 +71,7 @@ export const uploadSlice = createSlice({
         state.isSuccess = false;
         state.message = action.payload;
       })
-      .addCase(resetState, () => initialState);
+      .addCase(resetImages, () => initialState);
   },
 });
 export default uploadSlice.reducer;

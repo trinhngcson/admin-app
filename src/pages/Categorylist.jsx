@@ -16,9 +16,11 @@ import CustomModal from "../components/CustomModal";
 const Categorylist = () => {
   const [open, setOpen] = useState(false);
   const [categoryId, setCategoryId] = useState("");
-  const showModal = (e) => {
+  const [categoryName, setCategoryName] = useState("");
+  const showModal = (id, name) => {
     setOpen(true);
-    setCategoryId(e);
+    setCategoryId(id);
+    setCategoryName(name);
   };
   const hideModal = (e) => {
     setOpen(false);
@@ -62,7 +64,7 @@ const Categorylist = () => {
             <button
               className="fs-3 ms-3 text-danger bg-transparent border-0"
               onClick={() => {
-                showModal(pCateState[i]._id);
+                showModal(pCateState[i]._id, pCateState[i].title);
               }}
             >
               <AiFillDelete />
@@ -87,7 +89,7 @@ const Categorylist = () => {
         <Table columns={columns} dataSource={data1} />
       </div>
       <CustomModal
-        title="Bạn có chắc chắn xoá thương hiệu này không"
+        title={`Bạn có chắc chắn xoá loại sản phẩm: ${categoryName} này không`}
         hideModal={hideModal}
         open={open}
         action={() => {

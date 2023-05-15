@@ -22,6 +22,6 @@ export const store = configureStore({
     blogs: blogReducer,
     color: colorReducer,
     enquiry: enquiryReducer,
-    images: uploadReducer,
+    upload: uploadReducer,
   },
 });

@@ -184,7 +184,7 @@ const MainLayout = () => {
                 <img
                   width={32}
                   height={32}
-                  src="https://scontent.fsgn5-15.fna.fbcdn.net/v/t39.30808-1/339112385_2211556155709376_8472273443879740065_n.jpg?stp=c0.5.40.40a_cp0_dst-jpg_p40x40&_nc_cat=111&ccb=1-7&_nc_sid=7206a8&_nc_ohc=M32VoJjbo-sAX9k-sjE&_nc_ht=scontent.fsgn5-15.fna&oh=00_AfBjeug8b4w8MlQJ9gqHW3qsKa39wQxhnTI8Dtf6085JoQ&oe=6441AF02"
+                  src="https://cdn.tgdd.vn/Files/2021/04/22/1345443/dac-diem-nhan-dien-cach-nuoi-meo-anh-long-ngan-202104221529108326.jpg"
                   alt="avatar"
                 />
               </div>

@@ -16,11 +16,13 @@ import CustomModal from "../components/CustomModal";
 const Colorlist = () => {
   const [open, setOpen] = useState(false);
   const [colorId, setColorId] = useState();
+  const [colorName, setColorName] = useState();
   const hideModal = () => {
     setOpen(false);
   };
-  const showModal = (e) => {
-    setColorId(e);
+  const showModal = (id, name) => {
+    setColorId(id);
+    setColorName(name);
     setOpen(true);
   };
   const columns = [
@@ -76,7 +78,7 @@ const Colorlist = () => {
             </Link>
             <button
               className="fs-3 ms-3 text-danger bg-transparent border-0"
-              onClick={() => showModal(colorState[i]._id)}
+              onClick={() => showModal(colorState[i]._id, colorState[i].title)}
             >
               <AiFillDelete />
             </button>
@@ -104,7 +106,7 @@ const Colorlist = () => {
         />
       </div>
       <CustomModal
-        title="Bạn có muốn xoá màu sắc này không"
+        title={`Bạn có muốn xoá màu sắc: ${colorName}này không`}
         hideModal={hideModal}
         open={open}
         action={() => {

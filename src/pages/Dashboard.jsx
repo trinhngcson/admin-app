@@ -1,5 +1,5 @@
 import React from "react";
-import { BsArrowDownRight, BsArrowUpRight } from "react-icons/bs";
+import { BsArrowDownRight } from "react-icons/bs";
 import { Column } from "@ant-design/plots";
 import { Table } from "antd";
 const Dashboard = () => {
